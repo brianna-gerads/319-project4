@@ -4,20 +4,28 @@ public class Task {
 	
 	private char id;
 	private int duration;
+	private char[] dependencies;
 	
 	private int ES;
 	private int EF;
 	private int LS;
 	private int LF;
 	
-	public Task(char id, int duration)
-	{
+	public Task(char id, int duration) {
 		this.id = id;
 		this.duration = duration;
 	}
 	
 	public int getDuration() {
 		return duration;
+	}
+	
+	public void setDependencies(char[] depen) {
+		dependencies = depen;
+	}
+	
+	public char[] getDependencies(char[] depen) {
+		return dependencies;
 	}
 
 	public int getES() {

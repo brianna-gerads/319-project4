@@ -9,5 +9,13 @@ public class TaskGraph {
 	public TaskGraph(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+	
+	public List<Task> getTasks(){
+		return tasks;
+	}
+	
+	public void addTasks(Task task){
+		tasks.add(task);
+	}
 
 }
