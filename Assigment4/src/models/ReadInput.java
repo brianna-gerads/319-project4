@@ -33,6 +33,7 @@ public class ReadInput {
 		return graph;
 	}
 	
+	//be aware of scanner probs**!**
 	private void checkDependencies(Task t, String dependencies, int numTasks) {
 		// **NOTE** Make char array expandable
 		
