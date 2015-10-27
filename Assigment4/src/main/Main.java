@@ -59,7 +59,7 @@ public class Main {
 		System.out.print("\n" + "Critical Path: ");
 		/*
 		for(Task t : crit.getTasks()) {
-			System.out.println(t.getId() + " ");
+			System.out.print(t.getId() + ", ");
 		}
 		*/
 		

@@ -1,0 +1,12 @@
+D 3 A
+A 2
+B 3
+C 2
+E 2 B,C
+F 1 A,B
+G 4 A
+H 5 C
+I 3 D,F
+J 3 E,G
+K 2 I
+L 2 K
