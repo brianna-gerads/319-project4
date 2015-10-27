@@ -6,7 +6,6 @@ public class Task {
 	
 	private Character id;
 	private int duration;
-	//private ArrayList<Task> dependencies = new ArrayList<Task>();
 	private Character[] dependencies;
 	
 	private int ES;

@@ -28,30 +28,13 @@ public class Main {
 		//read file and create initial task graph
 		graph = ReadInput.readFile(file);
 		List<Character> initialIds = graph.getInitialTaskIds();
-		//System.out.println(initialIds.toString());
 
-		//System.out.println(graph.getFinalTasksIds().toString());
-		/*
-		System.out.println(graph.getNextTaskIds(new Character('A')));
-		System.out.println(graph.getNextTaskIds(new Character('B')));
-		System.out.println(graph.getNextTaskIds(new Character('C')));
-		System.out.println(graph.getNextTaskIds(new Character('D')));
-		System.out.println(graph.getNextTaskIds(new Character('E')));
-		System.out.println(graph.getNextTaskIds(new Character('F')));
-		System.out.println(graph.getNextTaskIds(new Character('G')));
-		System.out.println(graph.getNextTaskIds(new Character('H')));
-		System.out.println(graph.getNextTaskIds(new Character('I')));
-		System.out.println(graph.getNextTaskIds(new Character('J')));
-		System.out.println(graph.getNextTaskIds(new Character('K')));
-		System.out.println(graph.getNextTaskIds(new Character('L')));
-		*/
 
 		//call scheduler
-		//graph = PDM.calculateEarly(graph);
 		graph = PDM.calculatePDM(graph);
 		
 		//calculate critical path
-		//crit = algorithms.CriticalPath.criticalPath(graph);
+		crit = algorithms.CriticalPath.criticalPath(graph);
 		
 		System.out.println();
 		//print out PDM for task graph
@@ -60,11 +43,11 @@ public class Main {
 		}
 		
 		//print our critical path
-		System.out.print("\n" + "Critical Path: ");
+		System.out.print("\n" + "Critical Path: { ");
 		for(Task t : crit.getTasks()) {
-			System.out.print(t.getId() + ", ");
+			System.out.print(t.getId() + " ");
 		}
-		
+		System.out.println("}");
 		
 	}
 	
