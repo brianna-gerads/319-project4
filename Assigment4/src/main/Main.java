@@ -17,19 +17,20 @@ public class Main {
 	public static void main(String args[]) throws FileNotFoundException {
 		//read input file
 		Scanner reader = new Scanner(System.in);
-		System.out.println("Enter your file name: ");
+		System.out.print("Enter your file name: ");
 		String fileName = reader.next();
 		File file = new File(fileName);
-		//File file = new File("InputSample1");
-		//File file = new File("InputSample2");
+		
+		//initialize taskgraph and criticalpath graph
 		TaskGraph graph = new TaskGraph(new ArrayList<Task>());
 		TaskGraph crit = new TaskGraph(new ArrayList<Task>());
 
+		//read file and create initial task graph
 		graph = ReadInput.readFile(file);
 		List<Character> initialIds = graph.getInitialTaskIds();
-		System.out.println(initialIds.toString());
+		//System.out.println(initialIds.toString());
 
-		System.out.println(graph.getFinalTasksIds().toString());
+		//System.out.println(graph.getFinalTasksIds().toString());
 		/*
 		System.out.println(graph.getNextTaskIds(new Character('A')));
 		System.out.println(graph.getNextTaskIds(new Character('B')));
@@ -47,21 +48,23 @@ public class Main {
 
 		//call scheduler
 		graph = PDM.calculateEarly(graph);
+		//graph = PDM.calculatePDM(graph);
 		
 		//calculate critical path
-		//crit = algorithms.CriticalPath.criticalPath(graph);
+		crit = algorithms.CriticalPath.criticalPath(graph);
 		
+		System.out.println();
 		//print out PDM for task graph
 		for(Task t : graph.getTasks()) {
 			System.out.println("[ES: " + t.getES() + " EF: " + t.getEF() + " Task: " + t.getId() + " Duration: " + t.getDuration() + " LS: " + t.getLS() + " LF: " + t.getLF() + "]");
 		}
+		
 		//print our critical path
 		System.out.print("\n" + "Critical Path: ");
-		/*
 		for(Task t : crit.getTasks()) {
 			System.out.print(t.getId() + ", ");
 		}
-		*/
+		
 		
 	}
 	
