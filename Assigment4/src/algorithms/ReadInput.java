@@ -30,7 +30,7 @@ public class ReadInput {
 				for(String string : strList) {
 					Character c = string.charAt(0);
 					depen.add(c);
-					graph.addEdge(id, c);
+					graph.addEdge(c, id);
 				}
 			}	
 			if(!depen.isEmpty()) {

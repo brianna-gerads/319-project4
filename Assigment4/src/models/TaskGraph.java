@@ -2,17 +2,19 @@ package models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TaskGraph {
 	
 	private List<Task> tasks;
-	private HashMap<Character, List<Character>> edgeMap; 
+	private ConcurrentHashMap<Character, List<Character>> edgeMap; 
 	
 	public TaskGraph(ArrayList<Task> arrayList) {
 		this.tasks = arrayList;
-		edgeMap = new HashMap<Character, List<Character>>();
+		edgeMap = new ConcurrentHashMap<Character, List<Character>>();
 	}
 
 	public List<Task> getTasks(){
@@ -54,9 +56,12 @@ public class TaskGraph {
 	
 	public List<Character> getInitialTaskIds() {
 		Set<Character> initialTaskIds = edgeMap.keySet();
-		for(Character id : initialTaskIds) {
+		Set<Character> initialTaskIdsCopy = new HashSet<Character>(initialTaskIds);
+		for(Character id : initialTaskIdsCopy) {
 			List<Character> successors = edgeMap.get(id);
-			initialTaskIds.removeAll(successors);
+			if(successors != null) {
+				initialTaskIds.removeAll(successors);
+			}		
 		}
 		return new ArrayList<Character>(initialTaskIds);
 	}
