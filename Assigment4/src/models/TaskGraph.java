@@ -73,6 +73,24 @@ public class TaskGraph {
 		return initialTasks;
 	}
 	
+	public List<Character> getFinalTasksIds() {
+		Set<Character> finalTaskIdSet = edgeMap.keySet();
+		List<Character> finalTaskIds = new ArrayList<Character>();
+		for(Character id : finalTaskIdSet) {
+			List<Character> successors = edgeMap.get(id);
+			if(successors == null) {
+				finalTaskIds.add(id);
+			}		
+		}
+		return finalTaskIds;
+	}
+	
+	public List<Task> getFinalTasks() {
+		List<Character> finalTaskIds = this.getFinalTasksIds();
+		List<Task> finalTasks = getTasksFromIds(finalTaskIds);
+		return finalTasks;
+	}
+	
 	public Task getTaskFromId(Character id) {
 		for(Task t : tasks) {
 			if(t.getId() == id) {
