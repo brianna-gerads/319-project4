@@ -29,9 +29,10 @@ public class TaskGraph {
 		List<Character> taskList = edgeMap.get(from);
 		if(taskList == null) {
 			taskList = new ArrayList<Character>();
+			edgeMap.put(from, taskList);
 		}
 		taskList.add(to);
-		edgeMap.put(from, taskList);
+		//edgeMap.put(from, taskList);
 	}
 	
 	public List<Character> getNextTaskIds(Character from) {
@@ -57,19 +58,36 @@ public class TaskGraph {
 	public List<Character> getInitialTaskIds() {
 		Set<Character> initialTaskIds = edgeMap.keySet();
 		Set<Character> initialTaskIdsCopy = new HashSet<Character>(initialTaskIds);
-		for(Character id : initialTaskIdsCopy) {
+		for(Character id : initialTaskIds) {
 			List<Character> successors = edgeMap.get(id);
 			if(successors != null) {
-				initialTaskIds.removeAll(successors);
+				initialTaskIdsCopy.removeAll(successors);
 			}		
 		}
-		return new ArrayList<Character>(initialTaskIds);
+		return new ArrayList<Character>(initialTaskIdsCopy);
 	}
 	
 	public List<Task> getInitialTasks() {
 		List<Character> initialTaskIds = this.getInitialTaskIds();
 		List<Task> initialTasks = getTasksFromIds(initialTaskIds);
 		return initialTasks;
+	}
+	
+	public List<Character> getFinalTasksIds() {
+		Set<Character> keyset = edgeMap.keySet();
+		List<Character> finalTaskIds = new ArrayList<Character>();
+		for(Task t : tasks) {
+			Character id = t.getId();
+			finalTaskIds.add(id);
+		}
+		finalTaskIds.removeAll(keyset);
+		return finalTaskIds;
+	}
+	
+	public List<Task> getFinalTasks() {
+		List<Character> finalTaskIds = this.getFinalTasksIds();
+		List<Task> finalTasks = getTasksFromIds(finalTaskIds);
+		return finalTasks;
 	}
 	
 	public Task getTaskFromId(Character id) {
