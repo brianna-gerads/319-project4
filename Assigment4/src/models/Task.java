@@ -31,6 +31,11 @@ public class Task {
 		dependencies = depen;
 	}
 	
+	public boolean hasDependencies() {
+		if (dependencies == null) return false;
+		return true;
+	}
+	
 	public void setDependencies(List<Character> depen) {
 		Character[] arr = new Character[depen.size()];
 		for(int i = 0; i < depen.size(); i++) {
@@ -39,7 +44,7 @@ public class Task {
 		dependencies = arr;
 	}
 	
-	public Character[] getDependencies(Character[] depen) {
+	public Character[] getDependencies() {
 		return dependencies;
 	}
 

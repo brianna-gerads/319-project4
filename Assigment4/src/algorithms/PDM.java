@@ -10,10 +10,29 @@ public class PDM {
 	/*
 	 * calculate first
 	 */
-	public static TaskGraph calculateEarly(TaskGraph input) {
-		TaskGraph output = new TaskGraph(new ArrayList<Task>());
-		
-		return output;
+	public static TaskGraph calculateEarly(TaskGraph input) {	
+		for(Task t : input.getInitialTasks()) {
+			t.setES(0);
+			t.setEF(t.getDuration());
+		}
+		for(Task t : input.getTasks()) {
+			Character[] depen = t.getDependencies();
+			if (t.hasDependencies()) {
+				int len = depen.length;
+				
+				//retrieve latest EF from previous tasks
+				int prevEF = 0;
+				for (int i = 0; i < len; i++) {
+					Task n = input.getTaskFromId(depen[i]);
+					if (n.getEF() > prevEF) prevEF = n.getEF();
+				}
+				
+				//set ES and EF now
+				t.setES(prevEF);
+				t.setEF(t.getDuration() + prevEF);
+			}
+		}
+		return input;
 	}
 	
 	/*
@@ -29,11 +48,10 @@ public class PDM {
 	 * compile the taskgraph with all things compiled
 	 */
 	public static TaskGraph calculatePDM(TaskGraph input) {
-		TaskGraph output = new TaskGraph(new ArrayList<Task>());
-		output = calculateEarly(input);
-		output = calculateLate(output);
+		input = calculateEarly(input);
+		input = calculateLate(input);
 		
-		return output;
+		return input;
 	}
 
 }
