@@ -29,9 +29,10 @@ public class TaskGraph {
 		List<Character> taskList = edgeMap.get(from);
 		if(taskList == null) {
 			taskList = new ArrayList<Character>();
+			edgeMap.put(from, taskList);
 		}
 		taskList.add(to);
-		edgeMap.put(from, taskList);
+		//edgeMap.put(from, taskList);
 	}
 	
 	public List<Character> getNextTaskIds(Character from) {
@@ -57,13 +58,13 @@ public class TaskGraph {
 	public List<Character> getInitialTaskIds() {
 		Set<Character> initialTaskIds = edgeMap.keySet();
 		Set<Character> initialTaskIdsCopy = new HashSet<Character>(initialTaskIds);
-		for(Character id : initialTaskIdsCopy) {
+		for(Character id : initialTaskIds) {
 			List<Character> successors = edgeMap.get(id);
 			if(successors != null) {
-				initialTaskIds.removeAll(successors);
+				initialTaskIdsCopy.removeAll(successors);
 			}		
 		}
-		return new ArrayList<Character>(initialTaskIds);
+		return new ArrayList<Character>(initialTaskIdsCopy);
 	}
 	
 	public List<Task> getInitialTasks() {
