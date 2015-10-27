@@ -1,13 +1,16 @@
-package models;
+package algorithms;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import models.Task;
+import models.TaskGraph;
+
 public class ReadInput {
 	
-	private TaskGraph readFile(File file) throws FileNotFoundException {
+	public static TaskGraph readFile(File file) throws FileNotFoundException {
 		Scanner s = new Scanner(file);
 		TaskGraph graph = new TaskGraph(new ArrayList<Task>());
 		int numTasks = 0;
@@ -34,7 +37,7 @@ public class ReadInput {
 	}
 	
 	//be aware of scanner probs**!**
-	private void checkDependencies(Task t, String dependencies, int numTasks) {
+	private static void checkDependencies(Task t, String dependencies, int numTasks) {
 		// **NOTE** Make char array expandable
 		
 		dependencies.replaceAll("\\s+", "");

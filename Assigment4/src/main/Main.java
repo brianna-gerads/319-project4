@@ -1,8 +1,12 @@
-package models;
+package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
+import models.Task;
+import models.TaskGraph;
+import algorithms.ReadInput;
 
 public class Main {
 
