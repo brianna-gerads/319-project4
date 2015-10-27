@@ -24,12 +24,13 @@ public class ReadInput {
 			char id = (char) lineScanner.next().charAt(0);
 			int duration = lineScanner.nextInt();
 			Task t = new Task(id, duration); 
-			Character c;
 			if(lineScanner.hasNext()) {
 				String depenString = lineScanner.next();
 				List<String> strList = Arrays.asList(depenString.split(","));
 				for(String string : strList) {
-					depen.add((Character)string.charAt(0));
+					Character c = string.charAt(0);
+					depen.add(c);
+					graph.addEdge(id, c);
 				}
 			}	
 			if(!depen.isEmpty()) {

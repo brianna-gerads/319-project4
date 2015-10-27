@@ -18,6 +18,7 @@ public class Main {
 
 		graph = ReadInput.readFile(file);
 		
+		
 		//call scheduler
 		
 		//calculate critical path

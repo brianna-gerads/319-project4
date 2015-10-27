@@ -34,4 +34,13 @@ public class TaskGraph {
 	public List<Character> getNextTasks(Character from) {
 		return edgeMap.get(from);
 	}
+	
+	public Task getTaskFromId(Character id) {
+		for(Task t : tasks) {
+			if(t.getId() == id) {
+				return t;
+			}
+		}
+		return null;
+	}
 }

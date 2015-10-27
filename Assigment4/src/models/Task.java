@@ -4,38 +4,42 @@ import java.util.List;
 
 public class Task {
 	
-	private char id;
+	private Character id;
 	private int duration;
 	//private ArrayList<Task> dependencies = new ArrayList<Task>();
-	private char[] dependencies;
+	private Character[] dependencies;
 	
 	private int ES;
 	private int EF;
 	private int LS;
 	private int LF;
 	
-	public Task(char id, int duration) {
+	public Task(Character id, int duration) {
 		this.id = id;
 		this.duration = duration;
+	}
+	
+	public Character getId() {
+		return this.id;
 	}
 	
 	public int getDuration() {
 		return duration;
 	}
 	
-	public void setDependencies(char[] depen) {
+	public void setDependencies(Character[] depen) {
 		dependencies = depen;
 	}
 	
 	public void setDependencies(List<Character> depen) {
-		char[] arr = new char[depen.size()];
+		Character[] arr = new Character[depen.size()];
 		for(int i = 0; i < depen.size(); i++) {
 			arr[i] = (char) depen.get(i);
 		}
 		dependencies = arr;
 	}
 	
-	public char[] getDependencies(char[] depen) {
+	public Character[] getDependencies(Character[] depen) {
 		return dependencies;
 	}
 
