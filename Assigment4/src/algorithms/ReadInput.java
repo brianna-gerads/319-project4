@@ -2,8 +2,10 @@ package algorithms;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import models.Task;
 import models.TaskGraph;
@@ -14,6 +16,30 @@ public class ReadInput {
 		Scanner s = new Scanner(file);
 		TaskGraph graph = new TaskGraph(new ArrayList<Task>());
 		int numTasks = 0;
+		
+		while(s.hasNextLine()){
+			String str = s.nextLine();
+			Scanner lineScanner = new Scanner(str);
+			List<Character> depen = new ArrayList<Character>();
+			char id = (char) lineScanner.next().charAt(0);
+			int duration = lineScanner.nextInt();
+			Task t = new Task(id, duration); 
+			Character c;
+			if(lineScanner.hasNext()) {
+				String depenString = lineScanner.next();
+				List<String> strList = Arrays.asList(depenString.split(","));
+				for(String string : strList) {
+					depen.add((Character)string.charAt(0));
+				}
+			}	
+			if(!depen.isEmpty()) {
+				t.setDependencies(depen);
+			}
+			graph.addTasks(t);
+		}
+		return graph;
+	}
+		/*
 		
 		while (s.hasNext()) {
 			char id = s.next().charAt(0);
@@ -57,6 +83,6 @@ public class ReadInput {
 		// **NOTE** ensure that dependencies have been run below!
 		
 		// **NOTE** check for a cycle of tasks' dependencies
-	}
+	}*/
 
 }

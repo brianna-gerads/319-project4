@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class Task {
 	
 	private char id;
@@ -23,6 +25,14 @@ public class Task {
 	
 	public void setDependencies(char[] depen) {
 		dependencies = depen;
+	}
+	
+	public void setDependencies(List<Character> depen) {
+		char[] arr = new char[depen.size()];
+		for(int i = 0; i < depen.size(); i++) {
+			arr[i] = (char) depen.get(i);
+		}
+		dependencies = arr;
 	}
 	
 	public char[] getDependencies(char[] depen) {
