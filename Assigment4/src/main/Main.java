@@ -27,6 +27,7 @@ public class Main {
 		graph = ReadInput.readFile(file);
 		List<Character> initialIds = graph.getInitialTaskIds();
 		System.out.println(initialIds.toString());
+		System.out.println(graph.getFinalTasksIds().toString());
 		/*
 		System.out.println(graph.getNextTaskIds(new Character('A')));
 		System.out.println(graph.getNextTaskIds(new Character('B')));

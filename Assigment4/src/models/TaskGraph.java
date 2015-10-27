@@ -74,14 +74,13 @@ public class TaskGraph {
 	}
 	
 	public List<Character> getFinalTasksIds() {
-		Set<Character> finalTaskIdSet = edgeMap.keySet();
+		Set<Character> keyset = edgeMap.keySet();
 		List<Character> finalTaskIds = new ArrayList<Character>();
-		for(Character id : finalTaskIdSet) {
-			List<Character> successors = edgeMap.get(id);
-			if(successors == null) {
-				finalTaskIds.add(id);
-			}		
+		for(Task t : tasks) {
+			Character id = t.getId();
+			finalTaskIds.add(id);
 		}
+		finalTaskIds.removeAll(keyset);
 		return finalTaskIds;
 	}
 	
