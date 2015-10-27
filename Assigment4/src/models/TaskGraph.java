@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class TaskGraph {
 	
@@ -31,8 +32,39 @@ public class TaskGraph {
 		edgeMap.put(from, taskList);
 	}
 	
-	public List<Character> getNextTasks(Character from) {
+	public List<Character> getNextTaskIds(Character from) {
 		return edgeMap.get(from);
+	}
+	
+	public List<Task> getNextTasks(Character from) {
+		List<Character> nextTaskIds = getNextTaskIds(from);
+		List<Task> nextTasks = getTasksFromIds(nextTaskIds);
+		return nextTasks;
+	}
+	
+	
+	public List<Task> getTasksFromIds(List<Character> idList) {
+		List<Task> taskList = new ArrayList<Task>();
+		for(Character id : idList) {
+			Task t = getTaskFromId(id);
+			taskList.add(t);
+		}
+		return taskList;
+	}
+	
+	public List<Character> getInitialTaskIds() {
+		Set<Character> initialTaskIds = edgeMap.keySet();
+		for(Character id : initialTaskIds) {
+			List<Character> successors = edgeMap.get(id);
+			initialTaskIds.removeAll(successors);
+		}
+		return new ArrayList<Character>(initialTaskIds);
+	}
+	
+	public List<Task> getInitialTasks() {
+		List<Character> initialTaskIds = this.getInitialTaskIds();
+		List<Task> initialTasks = getTasksFromIds(initialTaskIds);
+		return initialTasks;
 	}
 	
 	public Task getTaskFromId(Character id) {
