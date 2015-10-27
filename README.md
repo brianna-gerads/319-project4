@@ -13,6 +13,7 @@
       - SampleInput3 : This was used for testing. It contains a duration that is not an int and exemplifies that our program catches it
       - SampleInput4 : This was used for testing. It contains a task with a predecessor that does not exist yet and exemplifies that our program catches this error
       - SampleInput5 : This was used for testing. It contains tasks with a cycle in the task dependencies and exemplifies that our program catches this error
+      - SampleInput6 : This was used for testing. It contains tasks with a cycle in tasks where a task is duplicated and this exemplifies that our program catches this error
   
 <b>Program Explained</b>
 - <i>models:</i> The user will notice there is a models package with 2 models: Task and TaskGraph
