@@ -4,6 +4,7 @@ public class Task {
 	
 	private char id;
 	private int duration;
+	//private ArrayList<Task> dependencies = new ArrayList<Task>();
 	private char[] dependencies;
 	
 	private int ES;
