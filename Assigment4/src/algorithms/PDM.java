@@ -39,9 +39,41 @@ public class PDM {
 	 * Calculate the Late part after early because you need early to calculate late
 	 */
 	public static TaskGraph calculateLate(TaskGraph input) {
-		TaskGraph output = new TaskGraph(new ArrayList<Task>());
+		int maxEF = Integer.MIN_VALUE;
+		for(Task t : input.getFinalTasks()) { //Find max EF
+			int EF = t.getEF();
+			if(maxEF < EF) {
+				maxEF = EF;
+			}
+		}
 		
-		return output;
+		for(Task t : input.getFinalTasks()) {
+			int duration = t.getDuration();
+			t.setLF(maxEF);
+			t.setLS(maxEF - duration);
+			setLateOfDependencies(input, t);
+		}
+		
+		return input;
+	}
+	
+	private static void setLateOfDependencies(TaskGraph graph, Task t) {
+		Character[] dependencies = t.getDependencies();
+		if(dependencies == null) {
+			return;
+		}
+		for(Character depen : dependencies) {
+			Task task = graph.getTaskFromId(depen);
+			int LF = t.getLS();
+			int duration = task.getDuration();
+			if(task.getLF() > LF) {
+				task.setLF(LF);
+				task.setLS(LF - duration);
+			}
+			
+			
+			setLateOfDependencies(graph, task);
+		}
 	}
 	
 	/*

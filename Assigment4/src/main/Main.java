@@ -47,11 +47,11 @@ public class Main {
 		*/
 
 		//call scheduler
-		graph = PDM.calculateEarly(graph);
-		//graph = PDM.calculatePDM(graph);
+		//graph = PDM.calculateEarly(graph);
+		graph = PDM.calculatePDM(graph);
 		
 		//calculate critical path
-		crit = algorithms.CriticalPath.criticalPath(graph);
+		//crit = algorithms.CriticalPath.criticalPath(graph);
 		
 		System.out.println();
 		//print out PDM for task graph

@@ -17,6 +17,8 @@ public class Task {
 	public Task(Character id, int duration) {
 		this.id = id;
 		this.duration = duration;
+		LS = Integer.MAX_VALUE;
+		LF = Integer.MAX_VALUE;
 	}
 	
 	public Character getId() {
